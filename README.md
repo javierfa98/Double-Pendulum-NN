@@ -5,6 +5,7 @@
 - [Requirements](#requirements)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
+- [Dataset](#dataset)
 - [Related Work](#related-work)
 - [License](#license)
 - [Contact](#contact)
@@ -54,23 +55,56 @@ The script requires three command line arguments:
 
 Here are two examples demonstrating how to use the command:
 
-### Example 1: Generate a Dataset for a Double Pendulum
-To create a dataset of 100 simulations of a double pendulum:
+### Example 1: Generate a Dataset for a Double Pendulum on a Cart
+To create a dataset of 100 simulations of a double pendulum on a cart:
 
 ``
-python double_pendulum_nn.py pendulum dataset 100
+python double_pendulum_nn.py pendulum_cart dataset 100
 ``
 
-### Example 2: Generate an Animation for a Double Pendulum on a Cart
-To generate an animation of the double pendulum on a cart:
+### Example 2: Generate an Animation for a Double Pendulum
+To generate an animation of the double pendulum:
 
 ``
-python double_pendulum_nn.py pendulum_cart animation 1
+python double_pendulum_nn.py pendulum animation 1
 ``
 
 <p align="center">
   <img src="img/double_pendulum.gif" alt="drawing"/>
 </p>
+
+## Dataset
+The project has two datasets of 2000 simulations, one for each model. Each simulation corresponds to 5 seconds, where we save the information every 0.01 seconds ($dt$), that is, 100Hz. This results in 500 time steps in each simulation, and 1M time steps in total per model. The parameters defining the double pendulum, as well as $dt$, are those found by default in the constructors of [double_pendulum.py](models/double_pendulum.py) and [double_pendulum_on_cart.py](models/double_pendulum_on_cart.py). The initial conditions are modified in each simulation as can be found in [double_pendulum_nn.py](/double_pendulum_nn.py).
+
+### Double Pendulum Dataset
+Each row in each simulation of the [Double Pendulum Dataset](/dataset/double_pendulum/) corresponds to one time step and includes the following data:
+
+| Parameter          | Description                                          |
+|--------------------|------------------------------------------------------|
+| **th1 (rad)**      | Angle of the first pendulum                          |
+| **w1 (rad/s)**     | Angular velocity of the first pendulum               |
+| **th2 (rad)**      | Angle of the second pendulum                         |
+| **w2 (rad/s)**     | Angular velocity of the second pendulum              |
+| **a1 (rad/s²)**    | Angular acceleration of the first pendulum           |
+| **a2 (rad/s²)**    | Angular acceleration of the second pendulum          |
+
+### Double Pendulum Dataset
+Each row in each simulation of the [Double Pendulum on Cart Dataset](/dataset/double_pendulum_on_cart/) corresponds to one time step and includes the following data:
+
+| Parameter          | Description                                          |
+|--------------------|------------------------------------------------------|
+| **f (N)**          | Control force applied to the cart at each time step  |
+| **th1 (rad)**      | Angle of the first pendulum                          |
+| **w1 (rad/s)**     | Angular velocity of the first pendulum               |
+| **th2 (rad)**      | Angle of the second pendulum                         |
+| **w2 (rad/s)**     | Angular velocity of the second pendulum              |
+| **x (m)**          | Horizontal position of the cart                      |
+| **vx (m/s)**       | Horizontal velocity of the cart                      |
+| **a1 (rad/s²)**    | Angular acceleration of the first pendulum           |
+| **a2 (rad/s²)**    | Angular acceleration of the second pendulum          |
+| **ax (m/s²)**      | Horizontal acceleration of the cart                  |
+
+
 
 ## Related Work
 Here is a list of our proposed NN architectures. These NNs are suitable for training dynamical systems such as the double pendulum proposed in this project.

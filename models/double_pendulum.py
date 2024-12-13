@@ -131,8 +131,11 @@ class DoublePendulum:
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
             
-            writer.writerow(['th1 (rad)', 'w1 (rad/s)', 'th2 (rad)', 'w2 (rad/s)'])
+            writer.writerow(['th1 (rad)', 'w1 (rad/s)', 'th2 (rad)', 'w2 (rad/s)', 'a1 (rad/s^2)', 'a2 (rad/s^2)'])
             
             for i in range(len(self.t)):
                 th1, w1, th2, w2 = self.y[i]
-                writer.writerow([th1, w1, th2, w2])
+                derivs = self._derivs([th1, w1, th2, w2])
+                a1 = derivs[1]
+                a2 = derivs[3]
+                writer.writerow([th1, w1, th2, w2, a1, a2])

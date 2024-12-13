@@ -202,7 +202,11 @@ class DoublePendulumOnCart:
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
             
-            writer.writerow(['f (N)', 'th1 (rad)', 'w1 (rad/s)', 'th2 (rad)', 'w2 (rad/s)', 'x (m)', 'vx (m/s)'])
+            writer.writerow(['f (N)', 'th1 (rad)', 'w1 (rad/s)', 'th2 (rad)', 'w2 (rad/s)', 'x (m)', 'vx (m/s)', 'a1 (rad/s^2)', 'a2 (rad/s^2)', 'ax (m/s^2)'])
             
             for i in range(len(self.t)):
-                writer.writerow(np.append([self.control_force[i]],self.y[i]))
+                derivs = self._derivs(self.y[i],self.t[i])
+                a1 = derivs[1]
+                a2 = derivs[3]
+                ax = derivs[5]
+                writer.writerow(np.append([self.control_force[i]], np.append(self.y[i], [a1, a2, ax])))
