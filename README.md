@@ -31,8 +31,8 @@ Here is a list of the main files and directories included in the project, along 
 - `double_pendulum_nn.py`: Main script to generate animations and datasets of random configurations
 of the double pendulum and the double pendulum on a cart.
 - `dataset/`: Directory that contains datasets for each model.
-    - `double_pendulum/`: Directory for the double pendulum dataset. It has a small dataset of 500 simulations.
-    - `double_pendulum_on_cart/`: Directory for the double pendulum on a cart dataset. It has a small dataset of 500 simulations.
+    - `double_pendulum/`: Directory for the double pendulum dataset. It has an example dataset of 2000 simulations.
+    - `double_pendulum_on_cart/`: Directory for the double pendulum on a cart dataset. It has an example dataset of 2000 simulations.
 - `models/`: Directory that contains a class for each model.
     - `double_pendulum.py`: Class that models the motion of a double pendulum system, providing functionality to simulate, animate, and save its dynamic behavior based on customizable physical parameters and initial conditions.
     - `double_pendulum_on_cart.py`: Class that models the motion of a double pendulum on cart system, providing functionality to simulate, animate, and save its dynamic behavior based on customizable physical parameters and initial conditions.
@@ -85,8 +85,6 @@ Each row in each simulation of the [Double Pendulum Dataset](/dataset/double_pen
 | **w1 (rad/s)**     | Angular velocity of the first pendulum               |
 | **th2 (rad)**      | Angle of the second pendulum                         |
 | **w2 (rad/s)**     | Angular velocity of the second pendulum              |
-| **a1 (rad/s²)**    | Angular acceleration of the first pendulum           |
-| **a2 (rad/s²)**    | Angular acceleration of the second pendulum          |
 
 ### Double Pendulum Dataset
 Each row in each simulation of the [Double Pendulum on Cart Dataset](/dataset/double_pendulum_on_cart/) corresponds to one time step and includes the following data:
@@ -100,11 +98,6 @@ Each row in each simulation of the [Double Pendulum on Cart Dataset](/dataset/do
 | **w2 (rad/s)**     | Angular velocity of the second pendulum              |
 | **x (m)**          | Horizontal position of the cart                      |
 | **vx (m/s)**       | Horizontal velocity of the cart                      |
-| **a1 (rad/s²)**    | Angular acceleration of the first pendulum           |
-| **a2 (rad/s²)**    | Angular acceleration of the second pendulum          |
-| **ax (m/s²)**      | Horizontal acceleration of the cart                  |
-
-
 
 ## Related Work
 Here is a list of our proposed NN architectures. These NNs are suitable for training dynamical systems such as the double pendulum proposed in this project.
