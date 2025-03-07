@@ -44,14 +44,13 @@ of the double pendulum and the double pendulum on a cart.
 Using [double_pendulum_nn.py](double_pendulum_nn.py) to generate animations and datasets of random configurations of the double pendulum and the double pendulum on cart is very simple. Use the following command:
 
 ``
-python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>
+python double_pendulum_nn.py {pendulum,pendulum_cart} {dataset,animation} n_simulations
 ``
 
-The script requires three command line arguments:
-
-1. `<pendulum|pendulum_cart>`: Model to be used.
-2. `<dataset|animation>`: Specifies if it is generated a dataset of an animation.
-3. `<simulations>`: Number of simulations.
+Positional arguments:
+1. `{pendulum,pendulum_cart}`: Model of the system (str)
+2. `{dataset,animation}`: Mode of the script (str)
+3. `n_simulations`: Number of simulations to run (int)
 
 Here are two examples demonstrating how to use the command:
 

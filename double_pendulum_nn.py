@@ -1,31 +1,34 @@
-import sys
+import argparse
 import random
 
 from models.double_pendulum import DoublePendulum
 from models.double_pendulum_on_cart import DoublePendulumOnCart
 
 """
-Main script to generate animations and datasets of random configurations
-of the double pendulum and the double pendulum on cart. 
+Generate datasets and animations of the double pendulum and the double pendulum on cart. 
 
-Usage: python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>
+usage: double_pendulum_nn.py {pendulum,pendulum_cart} {dataset,animation} n_simulations
+
+positional arguments:
+    {pendulum,pendulum_cart}    Model of the system (str)
+    {dataset,animation}         Mode of the script (str)
+    n_simulations               Number of simulations to run (int)
 """
 
-if len(sys.argv) != 4:
-    print("Usage: python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>")
-    exit()
+parser = argparse.ArgumentParser(description='Generate datasets and animations of the double pendulum and the double pendulum on cart.')
+parser.add_argument('model', type=str, choices=['pendulum', 'pendulum_cart'], help='Model of the system (str)')
+parser.add_argument('mode', type=str, choices=['dataset', 'animation'], help='Mode of the script (str)')
+parser.add_argument('n_simulations', type=int, help='Number of simulations to run (int)')
 
-model = sys.argv[1].lower()
-mode = sys.argv[2].lower()
-n_simulations = int(sys.argv[3])
+args = parser.parse_args()
 
 PATH = "./dataset/"
 EXT = ".csv"
 
-if model == "pendulum":
+if args.model == "pendulum":
     pendulum = DoublePendulum()
     path = PATH + "double_pendulum/series_"
-    for i in range(n_simulations):
+    for i in range(args.n_simulations):
 
         th1 = random.uniform(0, 360)
         th2 = random.uniform(0, 360)
@@ -37,19 +40,16 @@ if model == "pendulum":
 
         pendulum.solve()
 
-        if mode == "dataset":
+        if args.mode == "dataset":
             filename = path + str(i+1) + EXT
             pendulum.save(filename)
-        elif mode == "animation":
+        elif args.mode == "animation":
             pendulum.animate()
-        else:
-            print("Usage: python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>")
-            exit()
 
-elif model == "pendulum_cart":
+elif args.model == "pendulum_cart":
     pendulum = DoublePendulumOnCart()
     path = PATH + "double_pendulum_on_cart/series_"
-    for i in range(n_simulations):
+    for i in range(args.n_simulations):
 
         th1 = random.uniform(0, 360)
         th2 = random.uniform(0, 360)
@@ -63,14 +63,8 @@ elif model == "pendulum_cart":
 
         pendulum.solve()
 
-        if mode == "dataset":
+        if args.mode == "dataset":
             filename = path + str(i+1) + EXT
             pendulum.save(filename)
-        elif mode == "animation":
+        elif args.mode == "animation":
             pendulum.animate()
-        else:
-            print("Usage: python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>")
-            exit()
-else:
-    print("Usage: python double_pendulum_nn.py <pendulum|pendulum_cart> <dataset|animation> <simulations>")
-    exit()
